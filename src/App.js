@@ -1,15 +1,16 @@
 import { Component } from 'react';
 import './App.css';
 
-const BookCard = ({Name, Notes}) => (
+const BookCard = ({Title, Author, Subtitle, Cover, Status, Description}) => (
   <div className="col-sm-4">
     <div className="card">
-      <img className="card-img-top" src="https://via.placeholder.com/362x200" alt="Movie poster" />
+      <img className="card-img-top" src={Cover[0].url} alt="Book cover" />
       <div className="card-body">
-        <h5 className="card-title">{Name}</h5>
-        <p className="card-text">{Notes}</p>
+        <h5 className="card-title">{Title}</h5>
+        <h6 className="card-subtitle mb-2 text-muted">{Subtitle}</h6>
+        <p className="card-text">{Author}</p>
         <p className="card-text">
-          <small className="text-muted">test</small>
+          <small className="text-muted">{Description}</small>
         </p>
       </div>
     </div>
