@@ -4,11 +4,16 @@ import './App.css';
 const BookCard = ({Title, Author, Subtitle, Cover, Status, Description}) => (
   <div className="col-sm-4">
     <div className="card">
-      <img className="card-img-top" src={Cover[0].url} alt="Book cover" />
+      <img className="card-img-top cover-photo" src={Cover ? Cover[0].url : "http://placehold.jp/150x250.png"} alt="Book cover" />
       <div className="card-body">
         <h5 className="card-title">{Title}</h5>
         <h6 className="card-subtitle mb-2 text-muted">{Subtitle}</h6>
-        <p className="card-text">{Author}</p>
+        <p className="card-text">{Author.Name/* {
+        Author.forEach(author => {
+          console.log(author);
+          return <p className="card-text">{author}</p>
+        })
+        } */}</p>
         <p className="card-text">
           <small className="text-muted">{Description}</small>
         </p>
@@ -34,7 +39,7 @@ class App extends Component {
       this.setState({ books: data.records });
     }).catch(err => {
       // Error
-      console.log('no return');
+      console.log('no return in fetch');
     });
   }
 
