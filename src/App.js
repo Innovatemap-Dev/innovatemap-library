@@ -1,29 +1,20 @@
 import { Component } from 'react';
 import './App.css';
 
-const BookCard = ({Title, Author, Subtitle, Cover, Status, Description}) => (
-  <div className="col-sm-4">
-    <div className="card">
-      <img className="card-img-top cover-photo" src={Cover ? Cover[0].url : "http://placehold.jp/150x250.png"} alt="Book cover" />
-      <div className="card-body">
-        <h5 className="card-title">{Title}</h5>
-        <h6 className="card-subtitle mb-2 text-muted">{Subtitle}</h6>
-        <p className="card-text">{Author}</p>
-        <p className="card-text">
-          <small className="text-muted">{Description}</small>
-        </p>
-      </div>
-    </div>
-  </div>
-);
 
-const BookCard1 = (books) => (
+const BookCard = ({book, authors}) => (
   <div className="col-sm-4">
     <div className="card">
       <div className="card-body">
-        {console.log(books)}
-        <p>{books.Title}</p>
-        <p className="card-text">{books.Name}</p>
+        <img className="card-img-top cover-photo" src={book.Cover ? book.Cover[0].url : "http://placehold.jp/150x250.png"} alt="Book cover" />
+        <div className="card-body">
+          <h5 className="card-title">{book.Title}</h5>
+          <h6 className="card-subtitle mb-2 text-muted">{book.Subtitle}</h6>
+          {authors.map((item,i) => <p className="card-text">{item.fields.Name}</p>)}
+          <p className="card-text">
+            <small className="text-muted">{book.Description}</small>
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -54,20 +45,19 @@ class App extends Component {
     .then(([resp1, resp2]) => {
       // set state in here
       this.setState({ 
-        books: resp1.records,
-        authors: resp2.records 
+        theWholeThang: resp1.records.map((el, i) => ({ book: el, authors: resp2.records.filter((value,i) => (el.fields.Author.includes(value.id))) }))
       });
     })
     .catch(err => {
       console.log('no return in fetch' + err);
     });
-
-    
   }
+  
+  
+  
 
   render() {
-    // Trying to combine Authors & Books
-    this.state.theWholeThang = this.state.books.map((el, i) => ({ book: el, authors: this.state.authors[i] }))
+
     return (
       <div className="container">
         <div className="row">
@@ -79,28 +69,7 @@ class App extends Component {
           </div>
         </div>
         <div className="row">
-          {this.state.books.map(book => <BookCard {...book.fields} /> )}
-        </div>
-        <div className="row">
-          {this.state.theWholeThang.map(book => <BookCard1 {...book.fields} /> )}
-          {/*this.state.authors.map(author => <BookCard1 books={author.Books} authors={author} /> )}
-          {this.state.books.map((val,index) => <BookCard1 data={val} authors={authors[index]} key={index} /> )*/
-          /*
-          const finalData = data.map(dataItem => {
-            dataItem.condition = dataItem.condition ? rulesMap[dataItem.condition] : null;
-            dataItem.helpers.map(item => {
-              item.condition = item.condition ? rulesMap[item.condition] : null
-            })
-            return dataItem;
-          });
-
-          const { data, desc } = this.state;
-          return (
-              <div className="thatThingIAlwaysForgetToAddInReact">
-                data.map((val, index) => <Well data={val} desc={desc[index]} key={index} onDelete={this.onDelete.bind(this)}/>
-              </div>
-            )
-        */}
+          {this.state.theWholeThang.map(item => <BookCard book={item.book.fields} authors={item.authors}  /> )}      
         </div>
       </div>
     );
