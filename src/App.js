@@ -5,15 +5,27 @@ import './App.css';
 const BookCard = ({book, authors}) => (
   <div className="col-sm-4">
     <div className="card">
-      <div className="card-body">
+      <div className="position-relative">
+        <div className="card-img-overlay">
+          <span className="d-inline-block" tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Checked out by: ">
+            <div className="badge bg-success" >{book.Status}</div>
+          </span>
+        </div>
         <img className="card-img-top cover-photo" src={book.Cover ? book.Cover[0].url : "http://placehold.jp/150x250.png"} alt="Book cover" />
-        <div className="card-body">
-          <h5 className="card-title">{book.Title}</h5>
-          <h6 className="card-subtitle mb-2 text-muted">{book.Subtitle}</h6>
-          {authors.map((item,i) => <p className="card-text">{item.fields.Name}</p>)}
-          <p className="card-text">
-            <small className="text-muted">{book.Description}</small>
-          </p>
+      </div>
+      <div className="card-body">
+        <h5 className="card-title">{book.Title}</h5>
+        <h6 className="card-subtitle mb-2 text-muted">{book.Subtitle}</h6>
+        <p>
+        {authors.map((item,i) => <span className="badge bg-info text-dark">{item.fields.Name}</span>)}
+        </p>
+        <p className="card-text">
+          <small className="text-muted">{book.Description}</small>
+        </p>
+      </div>
+      <div className="card-footer">
+        <div className="d-grid gap-2">
+          <a href="#" className="btn btn-outline-primary btn-sm">Request/Check Out</a>
         </div>
       </div>
     </div>
@@ -57,7 +69,7 @@ class App extends Component {
   
 
   render() {
-
+    console.log(this.state.theWholeThang);
     return (
       <div className="container">
         <div className="row">
