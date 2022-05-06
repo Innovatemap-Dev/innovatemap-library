@@ -39,6 +39,81 @@
 
 
 /* COVER IMAGES */
+.books-list {
+  background: #eaeaea;
+  padding-bottom: 60px;
+}
+
 .cover-photo {
   height: 300px;
+}
+
+.full-height {
+  height: 90vh;
+  padding: 60px;
+  background: rebeccapurple;
+}
+
+.request-cta {
+  background: rebeccapurple;
+  padding: 60px;
+  color: white;
+}
+
+.footer {
+  background: #eaeaea;
+  padding: 60px;
+}
+
+.title-top {
+  font-family: p22-mackinac-pro, serif;
+  font-weight: 700;
+  font-style: normal;
+  color: white;
+}
+
+.book-title {
+  font-family: p22-mackinac-pro, serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.authors {
+  font-weight: 400 !important;
+}
+
+/* BOOK SHELF */
+.shelf {
+  width:100%;
+  margin: 50px auto;
+  box-shadow:5px 5px 50px #000;
+}
+.shelf .column {
+  border-style:solid;
+  border-width:0 10px 8px 8px;
+  border-color:#444 #444 #444 #444;
+}
+.shelf .column .extra {
+  border-top: 8px solid #444;
+}
+.shelf .column .rand {
+  border-bottom:1px solid #888;
+  border-right:1px solid #555;
+}
+.shelf .column .inside {
+  border-style:solid;
+  border-color:#000 #222 #666 #111;
+  height:100px;
+  
+  box-shadow:inset 5px 5px 20px #000, inset 2px -2px 20px #111;
+}
+
+.grid-helper {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 24px;
+}
+
+.push-down {
+  padding-top: 3em;
 }
