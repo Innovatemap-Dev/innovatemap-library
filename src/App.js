@@ -161,7 +161,7 @@ class App extends Component {
           <div className="row">
             <div className='text-center'>
               <h4>Thanks to the gang</h4>
-              <h5>Brad, Christian, Kaleem, Jeese</h5>
+              <h5>Derek, Brad, Christian, Kaleem, Jesse</h5>
             </div>
           </div>
         </div>
